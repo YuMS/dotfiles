@@ -6,7 +6,7 @@ set -x
 chsh -s $(which zsh)
 
 # install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+CHSH=no RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 mkdir -p ~/install
 
@@ -22,7 +22,7 @@ echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc
 cd ~/install/
 git clone https://github.com/YuMS/dotfiles.git
 
-for f in dotfiles/.*
+for f in `ls -Ad dotfiles/.* | grep -v .git`
 do
   ln -sf ~/install/$f ~/
 done
